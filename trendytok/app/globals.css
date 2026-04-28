@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&family=Space+Grotesk:wght@300;400;600;700;800&family=Bebas+Neue&display=swap');
+@import "tailwindcss";
+
+:root {
+  --primary: #FF2D55;
+  --secondary: #FF6B35;
+  --accent: #FFD60A;
+  --dark: #0A0A0F;
+  --dark2: #13131A;
+  --dark3: #1C1C26;
+  --surface: #22222E;
+  --border: rgba(255,255,255,0.08);
+  --text: #F0F0F5;
+  --text-muted: #888899;
+  --green: #00E096;
+  --cool: #00C9FF;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--dark);
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.font-display { font-family: 'Bebas Neue', sans-serif; }
+.font-myanmar { font-family: 'Noto Sans Myanmar', sans-serif; }
+
+.snap-feed {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: calc(100dvh - 60px - 70px);
+}
+.snap-card {
+  scroll-snap-align: start;
+  height: calc(100dvh - 60px - 70px);
+}
+
+@keyframes floatTag {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+.float-tag { animation: floatTag 3s ease-in-out infinite; }
+.float-tag-delay { animation: floatTag 3s ease-in-out 1.5s infinite; }
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.pulse-dot { animation: pulseDot 1.5s infinite; }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+.input-dark {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input-dark:focus { border-color: var(--primary); }
+.input-dark::placeholder { color: var(--text-muted); font-weight: 400; }
