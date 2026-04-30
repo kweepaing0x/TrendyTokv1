@@ -1,13 +1,12 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Store, Calculator, Shield, Plus } from "lucide-react";
+import { Home, Store, Calculator, Shield } from "lucide-react";
 import { useStore } from "@/lib/store";
 
 const navItems = [
   { href: "/", icon: Home, en: "Home", my: "ပင်မ" },
   { href: "/products", icon: Store, en: "Shop", my: "ဆိုင်" },
-  { href: null, icon: Plus, en: "", my: "" }, // center add button
   { href: "/calculator", icon: Calculator, en: "Calc", my: "တွက်" },
   { href: "/privacy", icon: Shield, en: "Privacy", my: "လျှို့ဝှက်" },
 ];
@@ -23,22 +22,7 @@ export default function BottomNav() {
       background: "#13131A", borderTop: "1px solid rgba(255,255,255,0.08)",
       display: "flex", alignItems: "center", zIndex: 100,
     }}>
-      {navItems.map((item, i) => {
-        if (!item.href) {
-          return (
-            <Link key="add" href="/admin" style={{ flex: 1, display: "flex", justifyContent: "center" }}>
-              <div style={{
-                width: 46, height: 32,
-                background: "linear-gradient(135deg,#FF2D55,#FF6B35)",
-                borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center",
-                boxShadow: "0 4px 15px rgba(255,45,85,0.4)",
-              }}>
-                <Plus size={22} color="#fff" />
-              </div>
-            </Link>
-          );
-        }
-
+      {navItems.map((item) => {
         const isActive = pathname === item.href;
         const Icon = item.icon;
         return (

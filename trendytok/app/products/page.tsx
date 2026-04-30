@@ -1,23 +1,52 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Calculator, Zap, ShoppingCart, Search } from "lucide-react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useStore } from "@/lib/store";
 import { showToast } from "@/components/ui/Toast";
 import { PRODUCTS, CATEGORIES, THB_TO_MMK } from "@/lib/data";
 
 export default function ProductsPage() {
   const { t, addToCart } = useStore();
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState("All");
   const [photoIdx, setPhotoIdx] = useState<Record<string, number>>({});
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
 
   const filtered = activeCategory === "All"
     ? PRODUCTS
     : PRODUCTS.filter((p) => p.category === activeCategory);
 
+  useEffect(() => {
+    // Handle hash navigation
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      const product = PRODUCTS.find(p => p.name.en.replace(/\s+/g, '-').toLowerCase() === hash.toLowerCase());
+      if (product) {
+        setSelectedProduct(product);
+        setTimeout(() => {
+          document.getElementById(`product-${product.id}`)?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, []);
+
   const handleAddToCart = (p: typeof PRODUCTS[0]) => {
     addToCart({ productId: p.id, name: t(p.name.en, p.name.my), priceThb: p.priceThb, emoji: p.emoji });
     showToast(`🛒 ${t("Added to cart!", "ကတ်ထဲထည့်ပြီး!")}`);
+  };
+
+  const handleCheckout = (product: typeof PRODUCTS[0]) => {
+    const productDetail = `
+${t(product.name.en, product.name.my)}
+Price: ฿${product.priceThb} (≈ ${Math.round(product.priceThb * THB_TO_MMK)} MMK)
+
+${t(product.description.en, product.description.my)}
+    `.trim();
+    
+    const telegramURL = `https://t.me/Trendytok88?text=${encodeURIComponent(`I want to buy:\n\n${productDetail}`)}`;
+    window.open(telegramURL, '_blank');
   };
 
   return (
@@ -47,10 +76,12 @@ export default function ProductsPage() {
       {filtered.map((product) => {
         const imgIdx = photoIdx[product.id] ?? 0;
         return (
-          <div key={product.id} style={{
+          <div key={product.id} id={`product-${product.id}`} style={{
             margin: "0 16px 16px",
             background: "#1C1C26", borderRadius: 20, overflow: "hidden",
             border: "1px solid rgba(255,255,255,0.08)",
+            boxShadow: selectedProduct?.id === product.id ? "0 0 20px rgba(255,45,85,0.4)" : "none",
+            transition: "box-shadow 0.3s",
           }}>
             {/* Image area */}
             <div style={{ position: "relative", height: 240, overflow: "hidden" }}>
@@ -130,7 +161,7 @@ export default function ProductsPage() {
                     <Calculator size={14} /> {t("Calc Fee", "တွက်")}
                   </button>
                 </Link>
-                <button onClick={() => showToast(t("Redirecting to checkout…", "ငွေပေးချေမှုသို့..."))} style={{
+                <button onClick={() => handleCheckout(product)} style={{
                   padding: "10px 0", borderRadius: 12, fontSize: 12, fontWeight: 700,
                   border: "none", color: "#fff",
                   background: "linear-gradient(135deg,#FF2D55,#FF6B35)",
