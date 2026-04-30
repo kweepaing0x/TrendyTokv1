@@ -15,7 +15,7 @@ interface AuthCtx {
 const Ctx = createContext<AuthCtx>({} as AuthCtx);
 
 // List of admin emails — add yours here or control via Supabase role
-const ADMIN_EMAILS = ["admin@trendytok.app"];
+const ADMIN_EMAILS = ["ldr4211@gmail.com"];
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
