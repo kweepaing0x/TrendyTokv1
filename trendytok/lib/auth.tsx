@@ -28,51 +28,86 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     try {
+      console.log(`[Auth] Checking admin status for user: ${userId} (${email})`);
+      
+      // Query admin_users table
       const { data, error } = await supabase
         .from("admin_users")
-        .select("*")
-        .eq("user_id", userId)
-        .single();
+        .select("id, email, role, user_id")
+        .eq("user_id", userId);
 
-      if (!error && data) {
+      console.log(`[Auth] Query result:`, { data, error });
+
+      if (error) {
+        console.error(`[Auth] Database error:`, error.message);
+        setIsAdmin(false);
+        return;
+      }
+
+      if (data && data.length > 0) {
+        const adminRecord = data[0];
+        console.log(`[Auth] Admin found:`, adminRecord);
         setIsAdmin(true);
       } else {
+        console.log(`[Auth] No admin record found for user_id: ${userId}`);
         setIsAdmin(false);
       }
     } catch (err) {
+      console.error(`[Auth] Unexpected error:`, err);
       setIsAdmin(false);
     }
   };
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
+    const initAuth = async () => {
+      const { data } = await supabase.auth.getSession();
       setSession(data.session);
       const currentUser = data.session?.user ?? null;
       setUser(currentUser);
       
       if (currentUser?.id) {
-        checkAdminStatus(currentUser.id, currentUser.email);
+        console.log(`[Auth Init] User logged in:`, currentUser.id, currentUser.email);
+        await checkAdminStatus(currentUser.id, currentUser.email);
+      } else {
+        console.log(`[Auth Init] No user session`);
+        setIsAdmin(false);
       }
       setLoading(false);
-    });
+    };
 
-    const { data: listener } = supabase.auth.onAuthStateChange((_e, sess) => {
+    initAuth();
+
+    const { data: listener } = supabase.auth.onAuthStateChange(async (_event, sess) => {
+      console.log(`[Auth] State changed:`, _event);
       setSession(sess);
       const currentUser = sess?.user ?? null;
       setUser(currentUser);
       
       if (currentUser?.id) {
-        checkAdminStatus(currentUser.id, currentUser.email);
+        console.log(`[Auth] New user session:`, currentUser.id, currentUser.email);
+        await checkAdminStatus(currentUser.id, currentUser.email);
       } else {
+        console.log(`[Auth] User logged out`);
         setIsAdmin(false);
       }
     });
 
-    return () => listener.subscription.unsubscribe();
+    return () => listener?.subscription.unsubscribe();
   }, []);
 
   const signIn = async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
+    
+    if (!error) {
+      // After sign in, wait a moment then check admin status
+      setTimeout(async () => {
+        const { data } = await supabase.auth.getSession();
+        if (data.session?.user?.id) {
+          await checkAdminStatus(data.session.user.id, data.session.user.email);
+        }
+      }, 500);
+    }
+    
     return { error: error?.message ?? null };
   };
 
