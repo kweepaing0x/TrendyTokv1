@@ -112,7 +112,7 @@ export default function HomePage() {
             {videoUrl ? (
               <video
                 ref={(el) => setVideoRef(el, video.id)}
-                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 1 }}
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain", zIndex: 1 }}
                 loop muted={muted} playsInline preload="metadata"
                 onPlay={() => handleView(video.id, video.views || 0)}
               >
