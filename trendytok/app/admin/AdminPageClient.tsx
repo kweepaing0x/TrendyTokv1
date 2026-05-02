@@ -2,16 +2,59 @@
 import { useState, useEffect } from "react";
 import { Video, Package, Trash2, Plus, RefreshCw, Link2 } from "lucide-react";
 import { useStore } from "@/lib/store";
-import { useAuth } from "@/lib/auth";
+
+const ADMIN_PASSWORD = "Adminkweepaing1";
+
+function PasswordGate({ children }: { children: React.ReactNode }) {
+  const [input, setInput] = useState("");
+  const [unlocked, setUnlocked] = useState(false);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("tt_admin") === "1") setUnlocked(true);
+  }, []);
+
+  const submit = () => {
+    if (input === ADMIN_PASSWORD) {
+      sessionStorage.setItem("tt_admin", "1");
+      setUnlocked(true);
+      setError(false);
+    } else {
+      setError(true);
+      setInput("");
+    }
+  };
+
+  if (unlocked) return <>{children}</>;
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "80vh", gap: 16, padding: "0 32px" }}>
+      <div style={{ fontSize: 36 }}>🔐</div>
+      <div style={{ fontSize: 18, fontWeight: 800, color: "#F0F0F5" }}>Admin Access</div>
+      <input
+        type="password"
+        placeholder="Enter password"
+        value={input}
+        onChange={e => setInput(e.target.value)}
+        onKeyDown={e => e.key === "Enter" && submit()}
+        style={{ width: "100%", maxWidth: 320, background: "#1C1C26", border: `1px solid ${error ? "#FF2D55" : "rgba(255,255,255,0.1)"}`, borderRadius: 12, padding: "13px 16px", color: "#F0F0F5", fontSize: 15, outline: "none", fontFamily: "'Space Grotesk',sans-serif" }}
+        autoFocus
+      />
+      {error && <div style={{ fontSize: 12, color: "#FF2D55" }}>Wrong password</div>}
+      <button onClick={submit} style={{ width: "100%", maxWidth: 320, padding: "13px 0", borderRadius: 12, border: "none", background: "linear-gradient(135deg,#FF2D55,#FF6B35)", color: "#fff", fontSize: 15, fontWeight: 800, cursor: "pointer", fontFamily: "'Space Grotesk',sans-serif" }}>
+        Enter
+      </button>
+    </div>
+  );
+}
 import { supabase } from "@/lib/supabase";
 import { showToast } from "@/components/ui/Toast";
-import AdminLoginGate from "@/components/admin/AdminLoginGate";
+
 
 type Tab = "videos" | "products";
 
 function AdminPanel() {
   const { t } = useStore();
-  const { user } = useAuth();
   const [tab, setTab] = useState<Tab>("videos");
   const [videos, setVideos] = useState<any[]>([]);
   const [products, setProducts] = useState<any[]>([]);
@@ -54,7 +97,7 @@ function AdminPanel() {
       trending_pct: parseInt(videoForm.trending_pct),
       trending_label: videoForm.trending_label,
       likes: 0, views: 0,
-      created_by: user?.id,
+      created_by: null,
     }]).select().single();
     if (error) { showToast("❌ " + error.message); return; }
     if (videoForm.selectedProducts.length > 0 && newVideo) {
@@ -74,7 +117,6 @@ function AdminPanel() {
       instruction_en: productForm.instruction_en, instruction_my: productForm.instruction_my,
       price_thb: parseFloat(productForm.price_thb),
       category: productForm.category, emoji: productForm.emoji,
-      created_by: user?.id,
     }]);
     if (error) { showToast("❌ " + error.message); return; }
     showToast("✅ Product added!");
@@ -255,8 +297,8 @@ function AdminPanel() {
 
 export default function AdminPageClient() {
   return (
-    <AdminLoginGate>
+    <PasswordGate>
       <AdminPanel />
-    </AdminLoginGate>
+    </PasswordGate>
   );
 }
