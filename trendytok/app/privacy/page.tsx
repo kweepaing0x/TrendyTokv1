@@ -58,7 +58,7 @@ export default function PrivacyPage() {
       }}>
         <div style={{ fontSize: 52, marginBottom: 12 }}>🔒</div>
         <div className="font-display" style={{ fontSize: 34, letterSpacing: 1, marginBottom: 6 }}>
-          {t("PRIVACY POLICY", "လျှို့ဝှက်ချက်မူဝါဒ")}
+          {t("PRIVACY POLICY", "ကိုယ်ပိုင် မူဝါဒ")}
         </div>
         <div style={{ fontSize: 11, color: "#888899" }}>{t("Last updated: April 2025", "နောက်ဆုံးပြင်ဆင်မှု: ဧပြီ ၂၀၂၅")}</div>
       </div>
