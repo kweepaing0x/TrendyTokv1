@@ -19,7 +19,7 @@ const sections = [
   my: "ဖန်တီးသူ၏ အကြောင်းအရာနှင့် ညွှန်းဆိုမှု အသုံးပြုခြင်း",
   bodyEn: "Our policy is that we use the creator's video and will use their affiliation when a user makes a purchase. If there are any copyright issues or concerns, you can contact us to edit or delete the content.",
   bodyMy: "ကျွန်ုပ်တို့၏ မူဝါဒမှာ ကုန်ပစ္စည်းဖန်တီးသူ၏ ဗီဒီယိုကို အသုံးပြုပြီး သုံးစွဲသူတစ်ဦးက ဝယ်ယူမှုပြုလုပ်သည့်အခါ ၎င်းတို့၏ ညွှန်းဆိုမှုကို အသုံးပြုမည်ဖြစ်သည်။ မူပိုင်ခွင့်ဆိုင်ရာ ပြဿနာများ သို့မဟုတ် စိုးရိမ်မှုများရှိပါက၊ အကြောင်းအရာကို ပြင်ဆင်ရန် သို့မဟုတ် ဖျက်ရန် ကျွန်ုပ်တို့ထံ ဆက်သွယ်နိုင်ပါသည်။"
-}
+},
   {
     en: "Data Security",
     my: "ဒေတာလုံခြုံရေး",
@@ -27,11 +27,11 @@ const sections = [
     bodyMy: "ငွေပေးချေမှု အချက်အလက်အားလုံးကို SSL/TLS ဖြင့် ကုဒ်ဝှက်ထားသည်",
   },
   {
-    en: "Shipping & Cross-Border",
-    my: "ပို့ဆောင်မှု နှင့် နိုင်ငံဖြတ်ကျော်",
-    bodyEn: "Orders shipping to Myanmar may be subject to local customs regulations. Buyer is responsible for any applicable import duties. Estimated delivery 7 – 10 business days.",
-    bodyMy: "မြန်မာနိုင်ငံသို့ ပို့ဆောင်မှုများသည် ဒေသဆိုင်ရာ အကောက်ခွန်ဥပဒေနှင့် ဆက်စပ်နိုင်သည်",
-  },
+  en: "Shipping & Cross-Border",
+  my: "ပို့ဆောင်ရေးနှင့် နိုင်ငံဖြတ်ကျော် ဝန်ဆောင်မှု",
+  bodyEn: "Orders shipping to Myanmar may be subject to local customs regulations. We partner with trusted local land and air cargo services to deliver your order according to their policies. The cargo service is responsible for the shipment during transit. Buyer is responsible for any applicable import duties. Estimated delivery is 7 – 10 business days.",
+  bodyMy: "မြန်မာနိုင်ငံသို့ ပို့ဆောင်သော မှာယူမှုများသည် ဒေသဆိုင်ရာ အကောက်ခွန် စည်းမျဉ်းများနှင့် သက်ဆိုင်နိုင်ပါသည်။ ကျွန်ုပ်တို့သည် ယုံကြည်စိတ်ချရသော ပြည်တွင်း ကုန်းလမ်းနှင့် လေကြောင်း ကုန်စည်ပို့ဆောင်ရေးများနှင့် ချိတ်ဆက်ပြီး ၎င်းတို့၏ စည်းကမ်းချက်များအတိုင်း သင့်မှာယူမှုကို ပို့ဆောင်ပေးပါသည်။ ပို့ဆောင်နေစဉ်အတွင်း ကုန်ပစ္စည်းအတွက် တာဝန်ကို သက်ဆိုင်ရာ ကုန်စည်ပို့ဆောင်ရေးမှ တာဝန်ယူမည်ဖြစ်ပါသည်။ ဝယ်ယူသူသည် သက်ဆိုင်ရာ သွင်းကုန်အခွန်များအတွက် တာဝန်ရှိပါသည်။ ခန့်မှန်းခြေ ပို့ဆောင်ချိန်မှာ ရုံးဖွင့်ရက် ၇ ရက်မှ ၁၀ ရက်အထိ ကြာမြင့်နိုင်ပါသည်။"
+},
   {
     en: "Your Rights",
     my: "သင့်အခွင့်အရေးများ",
