@@ -11,8 +11,8 @@ export default function CalculatorPage() {
   const { t } = useStore();
   const [currency, setCurrency] = useState<Currency>("thb-mmk");
   const [price, setPrice] = useState("");
-  const [shipping, setShipping] = useState("150");
-  const [buyerFee, setBuyerFee] = useState("5");
+  const [shipping, setShipping] = useState("110");
+  const [buyerFee, setBuyerFee] = useState("10");
   const [result, setResult] = useState<{ price: number; ship: number; fee: number; total: number; mmk: number } | null>(null);
 
   const calculate = () => {
