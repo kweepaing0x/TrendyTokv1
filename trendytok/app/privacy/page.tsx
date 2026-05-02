@@ -15,6 +15,12 @@ const sections = [
     bodyMy: "သင့်ဒေတာကို မှာယူမှုများ ဆောင်ရွက်ရန်၊ feed ကိုပုဂ္ဂိုလ်ရည်ညွှန်းစေရန်နှင့် ပလက်ဖောင်းကို တိုးတက်ရန် အသုံးပြုသည်",
   },
   {
+  en: "Use of Creator Content and Affiliation",
+  my: "ဖန်တီးသူ၏ အကြောင်းအရာနှင့် ညွှန်းဆိုမှု အသုံးပြုခြင်း",
+  bodyEn: "Our policy is that we use the creator's video and will use their affiliation when a user makes a purchase. If there are any copyright issues or concerns, you can contact us to edit or delete the content.",
+  bodyMy: "ကျွန်ုပ်တို့၏ မူဝါဒမှာ ကုန်ပစ္စည်းဖန်တီးသူ၏ ဗီဒီယိုကို အသုံးပြုပြီး သုံးစွဲသူတစ်ဦးက ဝယ်ယူမှုပြုလုပ်သည့်အခါ ၎င်းတို့၏ ညွှန်းဆိုမှုကို အသုံးပြုမည်ဖြစ်သည်။ မူပိုင်ခွင့်ဆိုင်ရာ ပြဿနာများ သို့မဟုတ် စိုးရိမ်မှုများရှိပါက၊ အကြောင်းအရာကို ပြင်ဆင်ရန် သို့မဟုတ် ဖျက်ရန် ကျွန်ုပ်တို့ထံ ဆက်သွယ်နိုင်ပါသည်။"
+}
+  {
     en: "Data Security",
     my: "ဒေတာလုံခြုံရေး",
     bodyEn: "All payment information is encrypted using SSL/TLS. We do not store full credit card details. Your account is protected with industry-standard security practices.",
@@ -23,7 +29,7 @@ const sections = [
   {
     en: "Shipping & Cross-Border",
     my: "ပို့ဆောင်မှု နှင့် နိုင်ငံဖြတ်ကျော်",
-    bodyEn: "Orders shipping to Myanmar may be subject to local customs regulations. Buyer is responsible for any applicable import duties. Estimated delivery 3–7 business days.",
+    bodyEn: "Orders shipping to Myanmar may be subject to local customs regulations. Buyer is responsible for any applicable import duties. Estimated delivery 7 – 10 business days.",
     bodyMy: "မြန်မာနိုင်ငံသို့ ပို့ဆောင်မှုများသည် ဒေသဆိုင်ရာ အကောက်ခွန်ဥပဒေနှင့် ဆက်စပ်နိုင်သည်",
   },
   {
@@ -35,8 +41,8 @@ const sections = [
   {
     en: "Contact Us",
     my: "ဆက်သွယ်ရန်",
-    bodyEn: "For privacy concerns, email us at privacy@trendytok.app or reach us via in-app chat support. We respond within 24 hours.",
-    bodyMy: "ကိုယ်ရေးအချက်အလက် ကိစ္စရပ်များအတွက် privacy@trendytok.app သို့ အီးမေးပို့ပါ",
+    bodyEn: "For privacy concerns, email us at stxephen@gmail.com or reach us via in-app chat support. We respond within 24 hours.",
+    bodyMy: "ကိုယ်ရေးအချက်အလက် ကိစ္စရပ်များအတွက် stxephen@gmail.com  သို့ အီးမေးပို့ပါ",
   },
 ];
 
